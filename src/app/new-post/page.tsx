@@ -25,14 +25,23 @@ function PostPage  () {
     const name = formData.get("name") as string;
 
     // APIにPOST
-    const res = await fetch("http://localhost:3005/cards", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, category, money }),
-    });
-    const newCard = await res.json();
+    const addCard = async () => {
+      try {
+        const response = await fetch("../api", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name,category, money }),
+        });
+    
+        const newCard = await response.json();
+        
+        setCards((prev) => [...prev, newCard]); //  追加したデータを反映
+      } catch (error) {
+        console.error("カード追加エラー:", error);
+      }
+    };
 
-    setCards(prev => [...prev, newCard]);
+    addCard();
     router.push("/");
   };
 

@@ -1,5 +1,6 @@
 "use client"
-
+//useCntextを使って、コンポーネント間で状態を共有するためのコンテキストを作成
+// useContextを使うことで、コンポーネント間で状態を共有する
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 type Card = {
@@ -26,9 +27,10 @@ export const CardsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     const fetchData = async () => {
-      const response: Response = await fetch("http://localhost:3005/cards");
+      const response: Response = await fetch("/api");
       const data = await response.json();
-      setCards(data);
+      console.log(data);
+      setCards(data.data);
     };
     fetchData();
   }, []);

@@ -1,21 +1,22 @@
 "use client";
+//一覧表示ページ
 import { useState } from "react";
 import { useCards } from "./CardsContext"
 
 export default function Home() {
   const { cards, setCards } = useCards();
-  const [categories, setCategory] = useState<string[]>([]);
-  const [select, setSelect] = useState<string>("300");
+  const [categories, setCategory] = useState<string[]>([]);//チェックがつけられた項目の状態管理
+  const [select, setSelect] = useState<string>("300");//プルダウンの状態管理
 
-  const onChangeCategory = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeCategory = (event: React.ChangeEvent<HTMLInputElement>) => {//チェックがつけられた項目の状態管理
     if (event.target.checked) {
-      setCategory([...categories, event.target.value]);
+      setCategory([...categories, event.target.value]);//チェックがつけられた項目を追加
     } else {
-      setCategory(categories.filter((category) => category !== event.target.value));
+      setCategory(categories.filter((category) => category !== event.target.value));//チェックが外れた項目を削除
     }
   };
 
-  const PulldownMenu: React.FC = () => {
+  const PulldownMenu: React.FC = () => {//プルダウンメニューの表示
     const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
       setSelect(event.target.value);
     };
@@ -35,11 +36,11 @@ export default function Home() {
   };
 
   const Sidebar: React.FC = () => {
-    const isChecked = (value: string): boolean => {
+    const isChecked = (value: string): boolean => {//チェックボックス自体の状態を管理
       return categories.includes(value);
     };
 
-    return (
+    return (//チェックボックスの表示
       <div className="flex flex-col bg-gray-200 w-1/4  min-h-screen ">
         <p className="font-bold text-xl p-1">求人カテゴリ</p>
         {[
@@ -78,9 +79,9 @@ export default function Home() {
   }
   filteredCards = filteredCards.filter((card) => {
     return Number(card.money) >= Number(select);
-  });
+  });//フィルタリング
 
-  const Filter: React.FC = () => {
+  const Filter: React.FC = () => {//ページネーション
     const [currentPage, setCurrentPage] = useState<number>(1);
     const itemsPerPage: number = 10;
 
@@ -95,15 +96,15 @@ export default function Home() {
       }
     };
 
-    return (
+    return (//求人一覧の表示
       <div className=" w-3/4 min-h-screen ">
         <div>
-          <p className="font-bold text-xl">求人一覧</p>
-          <p>{`該当件数:${totalItems}件`}</p>
+          <p className="font-bold text-xl p-2">求人一覧</p>
+          <p className="p-2">{`該当件数:${totalItems}件`}</p>
         </div>
-        <div className=" flex flex-col ">
+        <div className=" flex flex-col ml-2 ">
           {currentItems.map((card) => (
-            <div className="border-gray-300 border-2 p-2 m-2 w-8777 border-radius rounded">
+            <div className="border-gray-300 border-2 p-2 m-2 w-260 border-radius rounded">
               <div>{card.name}</div>
               <div>カテゴリ:{card.category}</div>
               <div>年収{card.money}万円</div>

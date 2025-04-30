@@ -1,11 +1,9 @@
 import Link from 'next/link'
 
-export const  Header = () => {
+export const Header:React.FC = () => {
     return (
-        <header className="bg-blue-500 w-full h-20 text-white bg-blue-800 hover:bg-blue-700">
-            
-               
-                <nav className=" flex h-20 justify-between">
+        <header className="bg-blue-500 w-full h-20 text-white bg-blue-800 hover:bg-blue-700">                          
+            <nav className=" flex h-20 justify-between">
                 <div className="text-xl font-bold  p-4 m-2">
                     <h1>求人検索アプリ</h1>
                 </div>
@@ -15,5 +13,5 @@ export const  Header = () => {
                 </ul>
             </nav>
         </header>
-    )
+        )
 }
