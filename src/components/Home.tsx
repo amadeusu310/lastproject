@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useCards } from "./CardsContext"
 
 export default function Home() {
-  const { cards, setCards } = useCards();
+  const { cards, } = useCards();
   const [categories, setCategory] = useState<string[]>([]);//チェックがつけられた項目の状態管理
   const [select, setSelect] = useState<string>("300");//プルダウンの状態管理
 
@@ -104,7 +104,7 @@ export default function Home() {
         </div>
         <div className=" flex flex-col ml-2 ">
           {currentItems.map((card) => (
-            <div className="border-gray-300 border-2 p-2 m-2 w-260 border-radius rounded">
+            <div className="border-gray-300 border-2 p-2 m-2 w-260 border-radius rounded" key ={card.name}>
               <div>{card.name}</div>
               <div>カテゴリ:{card.category}</div>
               <div>年収{card.money}万円</div>
